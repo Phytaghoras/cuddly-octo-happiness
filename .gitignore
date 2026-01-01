@@ -1,2 +1,14 @@
 SKPL.pdf
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+
+# Database
+data/*.db
+
+# IDE
+.vscode/
+.idea/
 
