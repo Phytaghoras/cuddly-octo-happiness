@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MoodMinder Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#111813",
+                        "surface-dark": "#1a261e",
+                        "surface-highlight": "#28392e",
+                        "text-secondary": "#9db9a6",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-[#111813] dark:text-white font-display overflow-hidden h-screen flex">
+    <!-- Sidebar -->
+    <aside class="w-64 h-full bg-surface-dark border-r border-surface-highlight flex flex-col hidden md:flex">
+        <div class="p-6">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-primary"
+                    data-alt="Abstract gradient avatar with green and black tones"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBmY46jzVVzw8nFqOCI1-7iiCyyryMrlZkZvBw_qtI1vgoRAWRFX4imRY7bl0xlmvTgMSs3rbygUzUrBsdflO_EmqS7zq_gzKKh8xaO5iXkq6z8mkypUnXp9Lk7rXTSSdnGxSIPc4KbIhpTUvlp1-KN1fGfGD0t4Q0zEj26uQnJNB4TIiuOtky2HKF0yowp-SsIOUQH3KUlqLjxg9M-Ac91IzVB6WtC2YSWg7D0X8uYXOwqHRLxbyaKpxhOID1GnXYQGZCXfSFqUg");'>
+                </div>
+                <div class="flex flex-col">
+                    <h1 class="text-white text-base font-bold leading-normal">#name</h1>
+                    <p class="text-text-secondary text-xs font-medium">Daily Tracker</p>
+                </div>
+            </div>
+            <nav class="flex flex-col gap-2">
+                <a id="nav-calendar"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary border-l-4 border-primary cursor-pointer"
+                    onclick="navigateTo('calendar')">
+                    <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                    <p class="text-sm font-bold">Calendar</p>
+                </a>
+                <a id="nav-analytics"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-surface-highlight hover:text-white transition-colors cursor-pointer"
+                    onclick="navigateTo('analytics')">
+                    <span class="material-symbols-outlined text-[20px]">bar_chart</span>
+                    <p class="text-sm font-medium">Analytics</p>
+                </a>
+                <a id="nav-habits"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-surface-highlight hover:text-white transition-colors cursor-pointer"
+                    onclick="navigateTo('habits')">
+                    <span class="material-symbols-outlined text-[20px]">check_box</span>
+                    <p class="text-sm font-medium">Habits</p>
+                </a>
+                <a id="nav-settings"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-surface-highlight hover:text-white transition-colors cursor-pointer"
+                    onclick="navigateTo('settings')">
+                    <span class="material-symbols-outlined text-[20px]">settings</span>
+                    <p class="text-sm font-medium">Settings</p>
+                </a>
+            </nav>
+        </div>
+        <div class="mt-auto p-6">
+            <div class="p-4 rounded-xl bg-surface-highlight border border-[#3b5443]">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined text-primary text-[20px]">local_fire_department</span>
+                    <span class="text-white font-bold text-sm">Pro Tip</span>
+                </div>
+                <p class="text-text-secondary text-xs leading-relaxed">Tracking habits at the same time each day
+                    increases consistency by 40%.</p>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="flex-1 h-full flex flex-col overflow-y-auto relative scrollbar-hide">
+        <!-- Mobile Header -->
+        <div class="md:hidden flex items-center justify-between p-4 bg-surface-dark border-b border-surface-highlight">
+            <div class="flex items-center gap-2">
+                <div class="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">M
+                </div>
+                <span class="font-bold text-white">MoodMinder</span>
+            </div>
+            <button class="text-white">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+        <div id="view-calendar" class="view-section flex-1 flex flex-col max-w-[1400px] w-full mx-auto">
+            <!-- Page Header -->
+            <header class="px-6 py-6 md:px-8 md:py-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-4">
+                        <h3 id="current-month" class="text-white text-3xl md:text-4xl font-black tracking-tight">January
+                            2026</h3>
+                        <div class="flex items-center bg-surface-highlight rounded-lg p-0.5 border border-[#3b5443]">
+                            <button id="prev-month"
+                                class="size-8 flex items-center justify-center text-white hover:bg-surface-dark rounded hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+                            </button>
+                            <button id="next-month"
+                                class="size-8 flex items-center justify-center text-white hover:bg-surface-dark rounded hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-text-secondary text-base">Keep up the streak! You're doing great.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <!-- Legend -->
+                    <div
+                        class="hidden lg:flex items-center gap-3 mr-4 bg-surface-highlight/30 px-3 py-1.5 rounded-full border border-surface-highlight">
+                        <div class="flex items-center gap-1.5">
+                            <div class="size-2 rounded-full bg-[#13ec5b]"></div><span
+                                class="text-xs text-text-secondary">Great</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <div class="size-2 rounded-full bg-teal-400"></div><span
+                                class="text-xs text-text-secondary">Good</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <div class="size-2 rounded-full bg-slate-400"></div><span
+                                class="text-xs text-text-secondary">Meh</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <div class="size-2 rounded-full bg-orange-400"></div><span
+                                class="text-xs text-text-secondary">Bad</span>
+                        </div>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 h-10 px-5 bg-primary hover:bg-green-400 text-background-dark text-sm font-bold rounded-lg transition-colors shadow-[0_0_15px_rgba(19,236,91,0.3)]">
+                        <span class="material-symbols-outlined text-[20px]">edit_square</span>
+                        <span>Log Today</span>
+                    </button>
+                </div>
+            </header>
+            <!-- Stats Row -->
+            <div class="px-6 md:px-8 mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-surface-highlight p-4 rounded-xl border border-[#3b5443] flex flex-col gap-1">
+                    <p class="text-text-secondary text-xs font-medium uppercase tracking-wider">Current Streak</p>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-2xl font-bold text-white">x Days</span>
+                        <span class="text-primary text-xs font-bold">+xx from last month</span>
+                    </div>
+                </div>
+                <div class="bg-surface-highlight p-4 rounded-xl border border-[#3b5443] flex flex-col gap-1">
+                    <p class="text-text-secondary text-xs font-medium uppercase tracking-wider">Monthly Mood</p>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-2xl font-bold text-white">Good</span>
+                        <span class="material-symbols-outlined text-teal-400 text-[24px]">sentiment_satisfied</span>
+                    </div>
+                </div>
+                <div class="bg-surface-highlight p-4 rounded-xl border border-[#3b5443] flex flex-col gap-1">
+                    <p class="text-text-secondary text-xs font-medium uppercase tracking-wider">Habit Completion</p>
+                    <div class="flex items-center gap-2 h-8">
+                        <div class="flex-1 h-2 bg-surface-dark rounded-full overflow-hidden">
+                            <div class="h-full bg-primary w-[85%] rounded-full"></div>
+                        </div>
+                        <span class="text-sm font-bold text-white">85%</span>
+                    </div>
+                </div>
+                <div class="bg-surface-highlight p-4 rounded-xl border border-[#3b5443] flex flex-col gap-1">
+                    <p class="text-text-secondary text-xs font-medium uppercase tracking-wider">Top Habit</p>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-2xl font-bold text-white">Reading</span>
+                        <span class="material-symbols-outlined text-blue-400 text-[24px]">book_2</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Calendar Container -->
+            <div class="flex-1 px-6 md:px-8 pb-8 min-h-0 flex flex-col">
+                <div
+                    class="bg-surface-dark border border-[#3b5443] rounded-xl flex flex-col h-full overflow-hidden shadow-2xl">
+                    <!-- Days Header -->
+                    <div class="grid grid-cols-7 border-b border-[#3b5443] bg-surface-highlight/50">
+                        <div class="py-3 text-center text-text-secondary text-xs font-bold uppercase tracking-wider">Sun
+                        </div>
+                        <div class="py-3 text-center text-text-secondary text-xs font-bold uppercase tracking-wider">Mon
+                        </div>
+                        <div class="py-3 text-center text-text-secondary text-xs font-bold uppercase tracking-wider">Tue
+                        </div>
+                        <div class="py-3 text-center text-text-secondary text-xs font-bold uppercase tracking-wider">Wed
+                        </div>
+                        <div class="py-3 text-center text-text-secondary text-xs font-bold uppercase tracking-wider">Thu
+                        </div>
+                        <div class="py-3 text-center text-text-secondary text-xs font-bold uppercase tracking-wider">Fri
+                        </div>
+                        <div class="py-3 text-center text-text-secondary text-xs font-bold uppercase tracking-wider">Sat
+                        </div>
+                    </div>
+                    <!-- Calendar Grid -->
+                    <div id="calendar-grid" class="grid grid-cols-7 flex-1 bg-surface-dark auto-rows-fr">
+                        <!-- Calendar will be generated here by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- View: Analytics -->
+    <div id="view-analytics" class="view-section hidden flex-1 flex flex-col max-w-[1400px] w-full mx-auto p-8">
+        <h2 class="text-white text-3xl font-bold mb-4">Analytics</h2>
+        <p class="text-text-secondary">Analytics view placeholder...</p>
+    </div>
+
+    <!-- View: Habits -->
+    <div id="view-habits" class="view-section hidden flex-1 flex flex-col max-w-[1400px] w-full mx-auto p-8">
+        <h2 class="text-white text-3xl font-bold mb-4">Habits Management</h2>
+        <p class="text-text-secondary">Habits view placeholder...</p>
+    </div>
+
+    <!-- View: Settings -->
+    <div id="view-settings" class="view-section hidden flex-1 flex flex-col max-w-[1400px] w-full mx-auto p-8">
+        <h2 class="text-white text-3xl font-bold mb-4">Settings</h2>
+        <p class="text-text-secondary">Settings view placeholder...</p>
+    </div>
+    </main>
+
+    <script>
+        // Data Mocks (untuk simulasi data mood & habit)
+        const mockData = {
+            "2026-01-03": {
+                mood: "great",
+                habits: ["water", "gym", "reading"],
+                note: "Morning run was amazing..."
+            },
+            "2026-01-02": {
+                mood: "good",
+                habits: ["water", "sleep"]
+            },
+            "2026-01-04": {
+                mood: "bad",
+                note: "Tired all day."
+            },
+            "2026-01-09": {
+                mood: "awful",
+                note: "Work stress overload."
+            },
+            "2026-01-14": {
+                mood: "great",
+                habits: ["water", "reading"],
+                note: "Finally finished the project!",
+                highlight: true
+            }
+        };
+
+        const moodColors = {
+            "great": "bg-[#13ec5b]",
+            "good": "bg-teal-400",
+            "meh": "bg-slate-400",
+            "bad": "bg-orange-400",
+            "awful": "bg-red-500"
+        };
+
+        const moodShadows = {
+            "great": "shadow-[0_0_8px_rgba(19,236,91,0.3)]",
+            "good": "shadow-[0_0_8px_rgba(45,212,191,0.3)]"
+        };
+
+        const habitIcons = {
+            "water": { icon: "water_drop", color: "text-blue-400" },
+            "sleep": { icon: "bedtime", color: "text-purple-400" },
+            "gym": { icon: "fitness_center", color: "text-orange-400" },
+            "reading": { icon: "book_2", color: "text-white" },
+            "check": { icon: "check", color: "text-white" }
+        };
+
+        let currentDate = new Date(); // Start with today
+
+        const calendarGrid = document.getElementById('calendar-grid');
+        const monthDisplay = document.getElementById('current-month');
+        const prevButton = document.getElementById('prev-month');
+        const nextButton = document.getElementById('next-month');
+
+        if (prevButton && nextButton) {
+            prevButton.addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                renderCalendar();
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                renderCalendar();
+            });
+        }
+
+        function renderCalendar() {
+            calendarGrid.innerHTML = ''; // Clear existing
+
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+
+            // Update Header Text
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            monthDisplay.innerText = `${monthNames[month]} ${year}`;
+
+            const firstDay = new Date(year, month, 1).getDay(); // 0 = Sunday
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            const today = new Date();
+            const isCurrentMonth = today.getMonth() === month && today.getFullYear() === year;
+
+
+            // Previous Month Days (Padding)
+            for (let i = 0; i < firstDay; i++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = "border-b border-r border-[#3b5443]/30 p-2 min-h-[100px] bg-surface-highlight/5 opacity-50";
+                // Optional: Show numbers for prev month
+                // dayDiv.innerText = daysInPrevMonth - firstDay + 1 + i;
+                calendarGrid.appendChild(dayDiv);
+            }
+
+            // Current Month Days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dayData = mockData[dateKey];
+                const isToday = isCurrentMonth && day === today.getDate();
+
+                const dayDiv = document.createElement('div');
+
+                // Base Classes
+                let classes = "border-b border-r border-[#3b5443]/30 p-3 min-h-[100px] transition-colors group cursor-pointer relative flex flex-col gap-2";
+
+                if (isToday) {
+                    classes += " bg-[#13ec5b]/5 hover:bg-[#13ec5b]/10 ring-2 ring-inset ring-primary z-10";
+                } else {
+                    classes += " hover:bg-surface-highlight/30";
+                }
+
+                if (dayData && dayData.highlight) {
+                    classes += " bg-surface-highlight/20 hover:bg-surface-highlight/40 ring-1 ring-inset ring-primary/20";
+                }
+
+                dayDiv.className = classes;
+
+                // Content Construction
+                let htmlContent = `<div class="flex justify-between items-start">`;
+
+                // Day Number
+                if (isToday) {
+                    htmlContent += `
+                        <span class="text-primary text-sm font-bold bg-primary/20 px-1.5 rounded">${day}</span>
+                        <span class="text-[10px] uppercase font-bold text-primary tracking-wide">Today</span>
+                    `;
+                } else {
+                    htmlContent += `<span class="text-text-secondary text-sm font-medium group-hover:text-white">${day}</span>`;
+
+                    // Edit Icon for specific interaction (mock)
+                    if (dayData && dayData.highlight) {
+                        htmlContent += `<span class="material-symbols-outlined text-primary text-[14px]">edit</span>`;
+                    }
+                }
+                htmlContent += `</div>`;
+
+                // Data Rendering (Mood Bar)
+                if (dayData && dayData.mood) {
+                    const moodColor = moodColors[dayData.mood] || "bg-slate-400";
+                    const shadow = moodShadows[dayData.mood] || "";
+                    let width = "w-12";
+                    if (dayData.mood === 'great') width = "w-16";
+                    if (dayData.mood === 'bad') width = "w-10";
+
+                    htmlContent += `<div class="h-1.5 ${width} rounded-full ${moodColor} ${shadow}"></div>`;
+                } else if (!isToday && !dayData) {
+                    // Empty State hover effect
+                    htmlContent += `
+                         <div class="h-8 w-full border-2 border-dashed border-[#3b5443] rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity mt-auto">
+                            <span class="material-symbols-outlined text-text-secondary text-[16px]">add</span>
+                        </div>
+                    `;
+                } else if (isToday) {
+                    htmlContent += `
+                        <div class="mt-auto flex flex-col items-center justify-center">
+                            <button class="bg-primary text-background-dark text-xs font-bold px-3 py-1.5 rounded-full hover:bg-green-400 transition-colors">
+                                Log Now
+                            </button>
+                        </div>
+                     `;
+                }
+
+
+                // Habits Icons
+                if (dayData && dayData.habits) {
+                    htmlContent += `<div class="flex gap-1.5 flex-wrap">`;
+                    dayData.habits.forEach(habit => {
+                        const iconData = habitIcons[habit];
+                        if (iconData) {
+                            htmlContent += `<span class="material-symbols-outlined text-[14px] ${iconData.color}" title="${habit}">${iconData.icon}</span>`;
+                        }
+                    });
+                    htmlContent += `</div>`;
+                }
+
+                // Note
+                if (dayData && dayData.note) {
+                    htmlContent += `
+                        <p class="text-[10px] text-text-secondary truncate opacity-0 group-hover:opacity-100 transition-opacity">
+                            ${dayData.note}
+                        </p>
+                    `;
+                }
+
+                dayDiv.innerHTML = htmlContent;
+                calendarGrid.appendChild(dayDiv);
+            }
+
+            // Next Month Empty Slots to fill grid (assuming 5 rows max usually 35 or 42 cells)
+            // A simple grid might need to be filled to look consistent? 
+            // The Original had `grid-rows-5` but months span 5 or 6 weeks.
+            // Let's just fill the remaining cells to ensure borders look okay if we used border-r/b
+
+            const totalCellsRendered = firstDay + daysInMonth;
+            const remainingCells = (totalCellsRendered % 7 === 0) ? 0 : 7 - (totalCellsRendered % 7);
+            // Additionally ensure we have at least enough rows to look good? 
+            // CSS grid auto-rows will handle height.
+
+            for (let i = 0; i < remainingCells; i++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = "border-b border-r border-[#3b5443]/30 p-2 min-h-[100px] bg-surface-highlight/5 opacity-50";
+                calendarGrid.appendChild(dayDiv);
+            }
+
+        }
+
+        // Router Logic
+        function navigateTo(viewId) {
+            // 1. Hide all views
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.add('hidden');
+            });
+
+            // 2. Show selected view
+            const selectedView = document.getElementById(`view-${viewId}`);
+            if (selectedView) {
+                selectedView.classList.remove('hidden');
+            }
+
+            // 3. Update Sidebar Active State
+            // Reset all
+            document.querySelectorAll('nav a').forEach(el => {
+                el.className = "flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-surface-highlight hover:text-white transition-colors cursor-pointer";
+            });
+
+            // Set active
+            const activeNav = document.getElementById(`nav-${viewId}`);
+            if (activeNav) {
+                activeNav.className = "flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary border-l-4 border-primary cursor-pointer";
+            }
+        }
+
+        // Initial Render
+        renderCalendar();
+
+    </script>
+
+</body>
+
+</html>
