@@ -1,0 +1,141 @@
+{
+    "name": "MoodMinder - Offline Requirements",
+    "version": "1.0.0",
+    "description": "Daftar lengkap semua resource yang dibutuhkan untuk menjalankan aplikasi secara offline. Tidak ada ketergantungan ke CDN eksternal.",
+    "lastUpdated": "2026-01-03T15:20:11+07:00",
+    "offlineMode": true,
+    "fonts": {
+        "description": "Semua font di-host secara lokal dalam folder frontend/fonts/",
+        "path": "frontend/fonts/",
+        "files": [
+            {
+                "name": "Manrope Regular (400)",
+                "filename": "xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FO_F.ttf",
+                "format": "truetype",
+                "originalSource": "https://fonts.googleapis.com/css2?family=Manrope:wght@400",
+                "size": "94972 bytes"
+            },
+            {
+                "name": "Manrope Medium (500)",
+                "filename": "xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk7PFO_F.ttf",
+                "format": "truetype",
+                "originalSource": "https://fonts.googleapis.com/css2?family=Manrope:wght@500",
+                "size": "95060 bytes"
+            },
+            {
+                "name": "Manrope Bold (700)",
+                "filename": "xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59E-_F.ttf",
+                "format": "truetype",
+                "originalSource": "https://fonts.googleapis.com/css2?family=Manrope:wght@700",
+                "size": "95688 bytes"
+            },
+            {
+                "name": "Manrope Extra Bold (800)",
+                "filename": "xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4aE-_F.ttf",
+                "format": "truetype",
+                "originalSource": "https://fonts.googleapis.com/css2?family=Manrope:wght@800",
+                "size": "94928 bytes"
+            },
+            {
+                "name": "Material Symbols Outlined",
+                "filename": "MaterialSymbolsOutlined.ttf",
+                "format": "truetype",
+                "originalSource": "https://github.com/google/material-design-icons/raw/master/variablefont/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].ttf",
+                "size": "10178540 bytes (~10MB)",
+                "note": "Variable font lengkap dengan semua icons dari Google Material Design Icons repository"
+            },
+            {
+                "name": "Material Symbols Outlined (TTF backup)",
+                "filename": "kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOem.ttf",
+                "format": "truetype",
+                "originalSource": "Google Material Symbols",
+                "size": "954856 bytes",
+                "note": "Backup TTF version untuk compatibility"
+            }
+        ]
+    },
+    "css": {
+        "description": "Stylesheet untuk @font-face definitions",
+        "path": "frontend/css/",
+        "files": [
+            {
+                "name": "Fonts CSS (Local @font-face)",
+                "filename": "fonts.css",
+                "purpose": "Deklarasi @font-face untuk Manrope dan Material Symbols dengan path lokal"
+            }
+        ]
+    },
+    "javascript": {
+        "description": "Script JavaScript termasuk TailwindCSS bundle",
+        "path": "frontend/js/",
+        "files": [
+            {
+                "name": "TailwindCSS Bundle",
+                "filename": "tailwindcss.js",
+                "version": "TailwindCSS v3.x (bundled)",
+                "originalSource": "https://cdn.tailwindcss.com?plugins=forms,container-queries",
+                "plugins": [
+                    "@tailwindcss/forms",
+                    "@tailwindcss/container-queries"
+                ],
+                "note": "Browser-based Tailwind dengan plugin forms dan container-queries"
+            }
+        ]
+    },
+    "html": {
+        "description": "File HTML utama aplikasi",
+        "path": "frontend/html/",
+        "files": [
+            {
+                "name": "Global Dashboard",
+                "filename": "global.html",
+                "note": "Updated untuk menggunakan resource lokal, bukan CDN"
+            }
+        ]
+    },
+    "images": {
+        "description": "Aset gambar untuk aplikasi",
+        "path": "frontend/images/",
+        "files": [
+            {
+                "name": "Avatar Placeholder",
+                "filename": "avatar_placeholder.png",
+                "purpose": "Default user avatar untuk sidebar"
+            }
+        ],
+        "note": "Semua gambar sudah di-host secara lokal"
+    },
+    "removedCDNDependencies": {
+        "description": "Daftar CDN yang telah dihapus dan diganti dengan resource lokal",
+        "removed": [
+            {
+                "type": "CSS",
+                "url": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap",
+                "replacedWith": "frontend/css/fonts.css → frontend/fonts/*.ttf"
+            },
+            {
+                "type": "CSS",
+                "url": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
+                "replacedWith": "frontend/css/fonts.css → frontend/fonts/material-symbols-outlined.woff2"
+            },
+            {
+                "type": "JavaScript",
+                "url": "https://cdn.tailwindcss.com?plugins=forms,container-queries",
+                "replacedWith": "frontend/js/tailwindcss.js"
+            }
+        ]
+    },
+    "usage": {
+        "instructions": [
+            "1. Pastikan semua file dalam 'fonts', 'css', 'js' folder sudah ada",
+            "2. Buka frontend/html/global.html di browser",
+            "3. Aplikasi akan berjalan sepenuhnya offline tanpa koneksi internet",
+            "4. Untuk production deployment, salin seluruh folder 'frontend/' ke web server"
+        ]
+    },
+    "status": {
+        "offlineReady": true,
+        "lastVerified": "2026-01-03T15:20:11+07:00",
+        "note": "Semua resource sudah di-host secara lokal. Aplikasi dapat berjalan tanpa koneksi internet."
+    }
+}

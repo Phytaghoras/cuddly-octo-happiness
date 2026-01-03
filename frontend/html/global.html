@@ -6,15 +6,71 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>MoodMinder Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- ================================================================
+         OFFLINE MODE: All resources are hosted locally
+         No external CDN dependencies (Google Fonts, TailwindCSS CDN)
+         ================================================================ -->
+
+    <!-- Local Fonts - Embedded for reliability -->
+    <style>
+        /* MANROPE FONT FAMILY */
+        @font-face {
+            font-family: 'Manrope';
+            font-weight: 400;
+            font-display: swap;
+            src: url('../fonts/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FO_F.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Manrope';
+            font-weight: 500;
+            font-display: swap;
+            src: url('../fonts/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk7PFO_F.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Manrope';
+            font-weight: 700;
+            font-display: swap;
+            src: url('../fonts/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59E-_F.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Manrope';
+            font-weight: 800;
+            font-display: swap;
+            src: url('../fonts/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4aE-_F.ttf') format('truetype');
+        }
+
+        /* MATERIAL SYMBOLS OUTLINED */
+        @font-face {
+            font-family: 'Material Symbols Outlined';
+            font-weight: 100 700;
+            font-display: block;
+            src: url('../fonts/MaterialSymbolsOutlined.ttf') format('truetype');
+        }
+
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            font-feature-settings: 'liga';
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+
+    <!-- Local TailwindCSS (bundled script with plugins) -->
+    <script src="../js/tailwindcss.js"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -56,7 +112,7 @@
             <div class="flex items-center gap-3 mb-8">
                 <div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-primary"
                     data-alt="Abstract gradient avatar with green and black tones"
-                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBmY46jzVVzw8nFqOCI1-7iiCyyryMrlZkZvBw_qtI1vgoRAWRFX4imRY7bl0xlmvTgMSs3rbygUzUrBsdflO_EmqS7zq_gzKKh8xaO5iXkq6z8mkypUnXp9Lk7rXTSSdnGxSIPc4KbIhpTUvlp1-KN1fGfGD0t4Q0zEj26uQnJNB4TIiuOtky2HKF0yowp-SsIOUQH3KUlqLjxg9M-Ac91IzVB6WtC2YSWg7D0X8uYXOwqHRLxbyaKpxhOID1GnXYQGZCXfSFqUg");'>
+                    style='background-image: url("../images/avatar_placeholder.png");'>
                 </div>
                 <div class="flex flex-col">
                     <h1 class="text-white text-base font-bold leading-normal">#name</h1>

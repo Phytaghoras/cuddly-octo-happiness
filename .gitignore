@@ -1,4 +1,5 @@
 SKPL.pdf
+.venv
 # Python
 __pycache__/
 *.pyc
@@ -12,3 +13,6 @@ data/*.db
 .vscode/
 .idea/
 
+# Node
+node_modules
+package-lock.json
